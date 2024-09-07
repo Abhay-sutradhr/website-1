@@ -1,0 +1,133 @@
+html,
+body,
+.wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+}
+
+@media (orientation:portrait) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
+@media (orientation:landscape) {
+
+}
+
+html {
+  font-size: 24px;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  line-height: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.brand {
+  width: 200px;
+  position: relative;
+  text-align: left;
+  background: #000;
+  color: #fff;
+}
+
+.brand .logo {
+  position: absolute;
+  bottom: 0;
+  width: 100vh;
+  height: 200px;
+  transform: rotate(270deg);
+  text-transform: uppercase;
+  font-size: 100px;
+  line-height: 200px;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.brand .logo::first-letter {
+  font-weight: bold;
+}
+
+.list {
+  display: flex;
+  flex: 1;
+}
+
+.list img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  width: 400px;
+  text-align: right;
+  background-image: url('https://i.postimg.cc/nc4mjbhC/tomat.jpg');
+
+  background-size: auto 150%;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-size: 3rem;
+  line-height: 1em;
+  margin-bottom: 0.5em;
+}
+
+.items {
+  flex: 1;
+  transition: transform 1s;
+  padding: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.item .image {
+  width: 140px;
+  text-align: left;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  display: none;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.button:hover {
+  background-color: #45a049;
+}

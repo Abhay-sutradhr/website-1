@@ -1,0 +1,225 @@
+%centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	font-family: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-family: 'Roboto', Hectva sans-serif;
+	font-size: 62.5%;
+
+	body {
+		margin: 0;
+		font-size: 1.6rem;
+
+		width: 100vw;
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		overflow-x: hidden;
+		background-color: #eee;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+[role='food-menu'] {
+	$categories: 'all', 'western', 'asian', 'vegan', 'dessert';
+	width: 100%;
+	color: #666;
+
+	.categories {
+		display: flex;
+		padding: 2rem;
+		color: rgba(39, 39, 39, 0.7);
+		font-size: 1.2em;
+		background-color: #dfdfdf;
+			box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.2);
+		
+		&::before {
+			content: 'categories:';
+		}
+		
+		@media only screen and (width < 460px) {
+			&::before {
+				display: none;
+			}
+		}
+
+		& > * {
+			@extend %centered;
+
+			position: relative;
+			transition: color 0.5s;
+			margin-inline-start: 1rem;
+
+			&::after {
+				content: attr(data-category);
+				text-transform: capitalize;
+			}
+
+			&::before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 0%;
+				height: 2px;
+				background-color: currentcolor;
+				bottom: -2px;
+				transition: width 0.5s;
+			}
+		}
+
+		@each $category in $categories {
+			&[data-selected='#{$category}'] [data-category='#{$category}'] {
+				color: #5f55f6;
+				font-weight: bold;
+
+				&::before {
+					width: 100%;
+				}
+			}
+
+			&[data-selected='#{$category}'] + .menu .item[data-category~='#{$category}'] {
+				display: flex;
+			}
+		}
+
+		&[data-selected='all'] + .menu .item {
+			display: flex;
+		}
+	}
+
+	.menu {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+		grid-auto-rows: 30rem;
+		grid-gap: 2rem;
+		padding: 2rem;
+		position: relative;
+
+		.item {
+			display: none;
+			position: relative;
+			flex-direction: column;
+			transition: all 0.5s;
+			align-items: center;
+			
+			&.sold-out {
+				.item-details {
+					filter: grayscale(1) brightness(0.8);
+				}
+			}
+			
+			.item-details {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				border-radius: 6px;
+				overflow: hidden;
+				transition: filter 2s;
+				box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
+				border: solid 2px rgba(0, 0, 0, 0.25);
+				
+				.cover {
+					display: block;
+					width: 100%;
+					height: 100%;
+					position: relative;
+					overflow: hidden;
+					transition: all 0.5s;
+					&::after {
+						content: '';
+						display: block;
+						width: 100%;
+						height: 100%;
+						background: var(--image) center/cover;
+						transition: transform 0.5s;
+					}
+				}
+
+				.title {
+					position: absolute;
+					top: 0;
+					font-size: 1.5em;
+					text-align: center;
+					display: block;
+					background-color: rgba(0, 0, 0, 0.5);
+					color: white;
+					width: 100%;
+					padding: 0 1rem;
+					line-height: 2em;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+			}
+				
+			.button-container {
+				position: absolute;
+				width: calc(100% - 4rem);
+				max-width: 24rem;
+				height: 6rem;
+				margin: 0 auto;
+				bottom: 2rem;
+
+				> * {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 4px;
+				}
+
+				button {
+					font-size: 2rem;
+					border: none;
+					background-color: #746ddd;
+					color: white;
+					cursor: pointer;
+					z-index: 1;
+					box-shadow: 0px 4px 0px #3d3873;
+					transition: all 0.2s;
+					transition-property: transform, box-shadow, filter;
+					border: solid 2px rgba(0, 0, 0, 0.2);
+
+					&:hover {
+						transform: translateY(-2px);
+						box-shadow: 0px 6px 0px #3d3873;
+						filter: brightness(1.2);
+					}
+				}
+
+				.error {
+					font-size: 2rem;
+					font-weight: bold;
+					background-color: #afafaf;
+					color: #555;
+					cursor: not-allowed;
+					opacity: 0.9;
+					box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.2) inset;
+					text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2), 0px -1px 1px rgba(0, 0, 0, 0.2);
+				}
+			}
+		}
+	}
+}

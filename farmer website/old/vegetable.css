@@ -1,0 +1,31 @@
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+    /* Adjust to the container's width */
+    position: relative;
+}
+
+.carousel {
+    display: flex;
+    gap: 10px;
+    /* Optional: space between items */
+    cursor: grab;
+    transition: transform 0.3s ease;
+}
+
+.item {
+    min-width: 200px;
+    /* Adjust to item width */
+    background-color: #ddd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.content2 {
+    width: 330px;
+    margin: 20px;
+    position: relative;
+}
+
